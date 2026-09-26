@@ -1,0 +1,41 @@
+idea: la idea es mediante una tabla de valores precalculados, poder calcular 2^x con cualquier valor de x.
+
+paso 1: el primer paso consiste en aprovechar la aceleracion computacional que nos brinda la base 2. para eso x se dividira en una suma de su parte entera mas su parte fraccionaria.
+
+2^x
+y = trunc(x)
+z = x - y
+2^(y + z)
+2^y * 2^z
+
+2^y, al ser y un numero entero, puede calcularse mediante una unica operacion de shift.
+
+luego nos queda 2^z, con restriccion de dominio: 0≤z<1
+
+paso 2: el siguiente paso sera descomponer z en sumandos siendo multiplicados por potencias de 10. la cantidad de digitos a descomponer depende de la precision de la mantisa. (si el argumento es uno, retornar el resultado rapido y no seguir en la subrutina)
+
+ej:.2^0.27
+2^(2/10 + 7/100)
+2^(2/10) * 2^(7/100)
+
+luego aqui el calculo de las potencias individuales de 2 son leidas directamente de una matriz de numeros precalculados de tamaño 10n, siendo n la cantidad de digitos decimales de precision minima garantizada. y un tamaño en bytes de 10nl donde l es el tamaño en bytes del flotante. ej: 4
+
+por ej: 3 digitos
+la tabla entonces tendra los valores precalculados de:
+2^0/10  2^0/100  2^0/1000
+2^1/10  2^1/100  2^1/1000
+2^2/10  2^2/100  2^2/1000
+2^3/10  2^3/100  2^3/1000
+2^4/10  2^4/100  2^4/1000
+2^5/10  2^5/100  2^5/1000
+2^6/10  2^6/100  2^6/1000
+2^7/10  2^7/100  2^7/1000
+2^8/10  2^8/100  2^8/1000
+2^9/10  2^9/100  2^9/1000
+
+se puede hacer lo mismo pero usando base 2, dandonos asi una aceleracion computacional.
+leyendo directamente los ~23 bits de la mantisa. dandonos una tabla de 23*4 bytes y si el bit es cero se avanza al proximo, no se lee un valor de la matriz ni se multiplica por uno.
+
+mediante experimentacion habria que ver si es necesario calcular (todas) las 23 multiplicaciones o no.
+
+antes de entrar a la subrutina ver anticipadamente si x es entero o no. 

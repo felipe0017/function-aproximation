@@ -1,0 +1,45 @@
+idea: la idea es mediante una tabla de valores precalculados, poder calcular log2(x) con cualquier valor de x valido.
+
+paso 1: el primer paso consiste en aprovechar la aceleracion computacional que nos brinda la base 2.
+
+log2(1.x * 2^y) = log2(1.x) + log2(2^y) = log2(1.x) + y
+
+r = log2(x), 1≤x<2 | 0≤r<1
+
+paso 2: ahora viene el calculo para un dominio limitado por el paso 1.
+
+el metodo tiene su origen en la propiedad de logaritmos: log2(x*y) = log2(x) + log2(y);
+que nos dice que si somos capaces de expresar el argumento del logaritmo como una lista de factores, estos pueden ser divididos en una suma de logaritmos. mi idea fue tener una lista finita de factores convenientes tal que cualquier argumento pueda ser expresado como un producto de algunos de estos factores convenientes. luego, al haberse convertido en sumas de logaritmos, la idea es tener precalculados los logaritmos de aquellos factores. ademas recordar que al momento de calcular el logaritmo con su argumento en un rango limitado, aquel argumento debe ser un flotante, es decir 1.x * 2^0
+
+estos factores se generan a partir de la expresion 1 + 2^(-w), siendo w un numero entero mayor que cero.
+una tabla para los primeros 10 factores serian los valores de:
+
+log2(1.5)
+log2(1.25)
+log2(1.125)
+log2(1.0625)
+log2(1.03125)
+log2(1.01562)
+log2(1.00781)
+log2(1.00391)
+log2(1.00195)
+log2(1.00098)
+
+seguramente una tabla de 16 factores o mas aun sean necesarios para dar con un resultado de 6 digitos decimales de un float32
+
+averiguar que factores son necesarios para una aproximacion es un proceso liviano computacionalmente y no requiere divisiones de punto flotante. unicamente son necesarias comparaciones y multiplicaciones.
+
+adicional:
+usar 2^x y log2(x) para calcular reciprocos veloces usando x^y no es viable, ya que log2 usa una division interna dentro de su subrutina de aproximacion.
+
+ejemplo:
+calcular log2(3.5)
+= log2(1.75 * 2^1)
+= log2(1.75) + 1
+= 1 + (log2(1.5 * 1.125 * 1.03125 * 1.00391 * 1.00098)  ≈ (1.74875078932 (e  ≈ 0.00124921067)))
+= 1 + log2(1.5) + log2(1.125) + log2(1.03125) + log2(1.00391) + log2(1.00098)
+
+y listo, los logaritmos estarian precalculados y solo restaria realizar las sumas de punto flotante.
+
+
+antes de entrar a la subrutina ver anticipadamente si x es potencia de dos.

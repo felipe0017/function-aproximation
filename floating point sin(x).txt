@@ -1,0 +1,25 @@
+idea: la idea es mediante una tabla de valores precalculados, poder calcular sin(x) ó cos(x) con cualquier valor de x valido.
+
+paso 1: el primer paso consiste en restringir el dominio. eso se logra quedandonos unicamente con la parte no entera de ua.
+sin(x) ó cos(x)
+x <- x - trunc(x)
+
+paso 2: el siguiente paso es calcular el seno ó coseno en sí. el dominio esta restringido al intervalo ]0, 1[
+
+el metodo tiene su origen en la propiedad de senos y cosenos:
+sen(x' ± x'') = sin(x')cos(x'') ± sin(x'')cos(x')
+y
+cos(x' ± x'') = cos(x')cos(x'') ± sin(x')sin(x'')
+y sus derivados que son multiples sumandos.
+
+la idea es encontrar sumandos que den como resultado x. y que puedan ser separados como senos y cosenos independientes cuyos valores esten ya precalculados.
+
+en este contexto, los sumandos son generados a partir de la expresion: 2^(-w), siendo w un numero entero mayor que cero.
+
+averiguar la lista de factores validos no es un proceso computacionalmente costoso, incluye sumas y comparaciones entre flotantes.
+
+ej: sen(0.875ua)
+0.875 ≈ 0.5 + 0.25 + 0.125, e ≈ 0
+sin(0.5)(cos(0.25)cos(0.125)+sin(0.25)sin(0.125))+((sin0.25)cos(0.125)+sin(0.125)cos(0.25))cos(0.5)
+
+y listo, los senos y cosenos de los sumandos convenientes estaran precalculados y restara leerlos y realizar las sumas y multiplicaciones. 

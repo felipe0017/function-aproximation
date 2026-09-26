@@ -1,0 +1,29 @@
+idea: la idea es mediante una tabla de valores precalculados, poder calcular inv(x) con cualquier valor de x valido.
+
+paso 1: el primer paso consiste en considerar el flotante como su expresion.
+1/ (1.x * 2^y)
+1/1.x * 1/2^y
+1.x^-1 * (2^y)^-1
+1.x^-1 * 2^-y
+
+en esta funcion exponencial el exponente tiene la forma mas sencilla de tratarse, ya que lo unico que hay que hacer es invertir su signo.
+
+la expresion 1.x^-1 sera el calculo en si del  reciproco.
+
+paso 2: el siguiente paso es calcular el reciproco en sí. el dominio esta restringido al intervalo ]1, 2]
+
+el metodo tiene su origen en la propiedad de potencias: (x*y)^z = x^z * y^z
+que nos dice que si somos capaces de expresar un numero base (estando elevado a un exponente) como una lista de factores, estos pueden ser divididos como una lista de factores independientes siendo elevados al exponente comun.
+
+en este contexto, el exponente es -1 y los factores son generados a partir de la expresion: 1 + 2^(-w), siendo w un numero entero mayor que cero.
+
+averiguar la lista de factores validos no es un proceso computacionalmente costoso, incluye multiplicaciones y comparaciones entre flotantes.
+
+la idea es tener una lista precalculada con los reciprocos de cada factor.
+
+ej: 1.3^-1
+1.3 ≈ 1.25 * 1.03125 * 1.00781 = 1,299130078125, e ≈ 0.00086992187
+= 1.25^-1 * 1.03125^-1 * 1.00781^-1
+y listo, los reciprocos de los factores convenientes estaran precalculados y restara leerlos y realizar las multiplicaciones.
+
+habria que ver si vale o no la pena hacer una subrutina especifica para esto. para eso habria que ver si es mas veloz que hacer una division de 1/x 

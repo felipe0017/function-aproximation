@@ -1,0 +1,8 @@
+todas las rutinas de trigonometria aceptaran y retornaran angulos unitarios.
+asi, un punto de coordenadas (1, 0) tendra un ua (unitary angle) de 0ua o de 1ua
+
+con el angulo unitario se vuelve mas veloz computacionalmente restringir el dominio.
+esto es debido a la forma interna del flotante, en donde con un angulo unitario
+bastaria con simplemente quedarnos con la parte fraccionaria. en este procedimiento
+esta presente la subrutina trunc() la cual tiene una division interna pero el denominador
+es una potencia de 2.

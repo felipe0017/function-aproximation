@@ -1,0 +1,14 @@
+este metodo calcula el seno y el coseno de un angulo sin valores precalculados.
+
+el metodo tiene su origen en los poligonos regulares y en la ecuacion de la circunferencia.
+un poligono regular de infinitos lados es un circulo. por lo que cada vertice se encuentra rotado una cantidad infinitesimalmente pequeña e igual de grados y a una distancia igual con sus pares.
+
+tener una forma de calcular las coordenadas de cada punto nos permitira ir obteniendo el seno y el coseno de todos los puntos, considerando un poligono regular de radio 1.
+
+querer calcular el seno y/o el coseno de un cierto punto, requiere haber calculado el seno y coseno de todos los puntos anteriores. este metodo no permite un calculo directo, sino por iteraciones con complejidad lineal por lo que es ideal para generar una tabla de valores precalculados para que una subrutina los use y calcule senos y cosenos en tiempo real.
+
+ir trasladandose en la ecuacion de la circunsferencia en el intervalo ]-1,+1[ desde +1 hasta -1 con un incremento infinitesimalmente pequeño y negativo en el eje x nos dara un recorrido por todos los puntos del poligono ó circulo.
+
+la siguiente deduccion permite la existencia de este metodo:
+al tener un poligono con una gran cantidad de vertices, podemos suponer que es un circulo, por lo que cada vertice esta unido con sus pares mediante un arco, no una linea recta.
+para obtener la distancia entre vertices basta con dividir el perimetro del circulo unitario en la cantidad de vertices. si usamos radianes es 2pi / n, siendo n la cantidad de vertices.

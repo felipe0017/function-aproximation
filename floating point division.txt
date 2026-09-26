@@ -1,0 +1,33 @@
+idea: x / y = z = z / 1
+la idea es hacer que y tienda a 1, asi los nuevos valores de x tenderan a z.
+
+paso 1: hacer que los dos flotantes representen numeros menores o iguales que 1.
+
+(a * 2^u)
+------------ =
+(b * 2^v)
+
+
+(a * 2^-1) * 2^(u+1)
+--------------------------- =
+(b * 2^-1) * 2^(v+1)
+
+
+(a * 2^-1)
+-------------- * 2^(u-v)
+(b * 2^-1)
+
+0.5 ≤ a,b < 1
+
+paso 2: amplificar la fraccion por numeros que sean resultado de la expresion: 1+(2^-w) para valores positivos de w.
+
+no hay limite de iteraciones, y cada una de ellas, dara una mejor o igual aproximacion a z.
+
+si en una iteracion al haber amplificado por 1+(2^-w) el denominador excedio el valor unitario, debe intentarse con el sucesor de w -> 1+(2^-(w+1))
+
+para volver computable este metodo, dependiendo de la precision necesaria, se limitaran las iteraciones.
+
+los factores de amplificacion pueden ser creados al momento de iterar.
+
+adicional:
+seria muy util detectar anticipadamente si el denominador es una potencia de 2. para eso solo basta con ver si el coeficiente es uno. y luego bastaria con ¿restar? los exponentes y listo. 

@@ -1,0 +1,43 @@
+idea: la idea es mediante una tabla de valores precalculados, poder calcular sqrt(x) con cualquier valor de x valido.
+
+paso 1: el primer paso consiste en considerar el flotante como su expresion.
+√(1.x * 2^y)
+√(1.x) * √(2^y)
+
+luego el exponente debe quedar entero.
+
+si 'y' es par:
+√(1.x) * √(2^(y/2))
+
+si 'y' es impar:
+√(1.x) * √(2^1) * √(2^((y-1)/2))
+el exponente quedara entero y las expresiones
+√(1.x)->1.x' * 2^y'
+y
+√(2^1)->1.x'' * 2^y''
+quedan en formato flotante.
+
+la expresion √(1.x) sera el calculo en si de la raiz cuadrada.
+
+la expresion √(2^1) sera precalculada y se multiplicara con el resultado de √(1.x) solo si 'y' es impar.
+
+finalmente debe incorporarse el exponente al resultado final, recordando que hasta el momento el resultado es en formato flotante y el exponente esta fragmentado. para eso aremos que el exponente quede en formato flotante, multiplicando por el elemento neutro, quedando: 1.0 * 2^new_y
+luego se vuelven a multiplicar, aunque como el coeficiente es uno, basta con sumar los exponentes.
+
+paso 2: el siguiente paso es calcular la raiz cuadrada en sí. el dominio esta restringido al intervalo ]1, 2]
+
+√(1.x) = (1.x)^0.5
+
+el metodo tiene su origen en la propiedad de potencias: (x*y)^z = x^z * y^z
+que nos dice que si somos capaces de expresar un numero base (estando elevado a un exponente) como una lista de factores, estos pueden ser divididos como una lista de factores independientes siendo elevados al exponente comun.
+
+en este contexto, el exponente es 0.5 y los factores son generados a partir de la expresion: 1 + 2^(-w), siendo w un numero entero mayor que cero.
+
+averiguar la lista de factores validos no es un proceso computacionalmente costoso, incluye multiplicaciones y comparaciones entre flotantes.
+
+la idea es tener una lista precalculada con las raices cuadradas de cada factor.
+
+ej: √(1.3)
+1.3 ≈ 1.25 * 1.03125 * 1.00781 = 1,299130078125, e ≈ 0.00086992187
+= √1.25 * √1.03125 * √1.00781
+y listo, las raices de los factores convenientes estaran precalculadas y restara leerlas y realizar las multiplicaciones. 

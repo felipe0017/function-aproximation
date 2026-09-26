@@ -1,0 +1,9 @@
+sincos(x) es una subrutina teorica que calcula el seno y el coseno de un angulo unitario en un tiempo menor a calcular el seno y el coseno por separado.
+
+tiene su origen en la identidad trigonometrica pitagorica
+(sen x)² + (cos x)² = 1
+cos x = ±sqrt(1 - (sin x)²)
+sin x = ±sqrt(1 - (cos x)²)
+la idea es calcular el seno (o el coseno) y mediante una raiz cuadrada, una resta y una multiplicacion poder obtener el coseno (o el seno).
+
+una vez que tengamos las latencias maximas de cada subrutina de aproximacion, podremos saber si el metodo es o no viable.
